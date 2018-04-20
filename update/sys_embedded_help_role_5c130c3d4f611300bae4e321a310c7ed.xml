@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_15865_potluck.potluck_event_user" name="x_15865_potluck.potluck_event_user">98130c3d4f611300bae4e321a310c7eb</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-04-18 22:41:57</sys_created_on>
+        <sys_id>5c130c3d4f611300bae4e321a310c7ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>98130c3d4f611300bae4e321a310c7eb</sys_name>
+        <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
+        <sys_update_name>sys_embedded_help_role_5c130c3d4f611300bae4e321a310c7ed</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-18 22:41:57</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>
