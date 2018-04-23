@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
     <element extends="mtg_meeting" label="Potluck Event" max_length="40" name="x_15865_potluck_potluck_event" type="collection">
+        <element hint="This field's value is included in the closing thank you email notification message body." label="Event notes" max_length="3000" name="event_notes" type="string"/>
+        <element label="Event Group" mandatory="true" max_length="32" name="group" read_only="true" reference="sys_user_group" type="reference"/>
+        <element hint="This fields value is  included in the email message body to open a calendar event." label="Message from organizer" max_length="3000" name="message_from_organizer" type="string"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <index name="index">
+            <element name="group"/>
+        </index>
     </element>
 </database>
