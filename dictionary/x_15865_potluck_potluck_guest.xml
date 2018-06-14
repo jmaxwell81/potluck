@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Potluck Guest" max_length="40" name="x_15865_potluck_potluck_guest" type="collection">
+        <element label="Event" max_length="32" name="event" reference="x_15865_potluck_group_potluck_event" type="reference"/>
+        <element display="true" label="Guest" max_length="32" name="guest" reference="sys_user" type="reference"/>
+        <element label="Meal item" max_length="40" name="meal_item" type="string"/>
+        <element choice="1" label="Meal type" mandatory="true" max_length="40" name="meal_type" type="choice">
+            <choice>
+                <element label="Appetizer" sequence="0" value="appetizer"/>
+                <element label="Main Dish" sequence="1" value="maindish"/>
+                <element label="Side Dish" sequence="2" value="sidedish"/>
+                <element label="Bread" sequence="3" value="bread"/>
+                <element label="Dessert" sequence="4" value="dessert"/>
+                <element label="Beverage" sequence="5" value="beverage"/>
+                <element label="Cups" sequence="6" value="Cups"/>
+                <element label="Servers" sequence="10" value="servers"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="guest"/>
+        </index>
+        <index name="index2">
+            <element name="event"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Potluck Event" max_length="40" name="x_15865_potluck_group_potluck_event" type="collection">
+        <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Event end time" max_length="40" name="event_end_time" type="glide_date_time"/>
+        <element label="Event group" max_length="32" name="event_group" reference="sys_user_group" type="reference"/>
+        <element label="Event venue" max_length="32" name="event_location" reference="cmn_location" type="reference"/>
+        <element display="true" label="Event name" max_length="200" name="event_name" type="string"/>
+        <element label="Event notes" max_length="3000" name="event_notes" type="string"/>
+        <element default="javascript:gs.getUserID();" dynamic_default_value="2fd8e97bef3221002841f7f775c0fbc1" label="Event Organizer" max_length="32" name="event_organizer" reference="sys_user" type="reference" use_dynamic_default="true"/>
+        <element label="Event start time" max_length="40" name="event_start_time" type="glide_date_time"/>
+        <element label="Message from organizer" max_length="3000" name="message_from_organizer" type="string"/>
+        <element default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <index name="index">
+            <element name="event_organizer"/>
+        </index>
+        <index name="index2">
+            <element name="event_location"/>
+        </index>
+        <index name="index3">
+            <element name="event_group"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-16 22:44:47</sys_created_on>
+        <sys_id>a81dccb64f821300bae4e321a310c758</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_15865_potluck_group_potluck_event.x_15865_potluck.potluck_guest_user</sys_name>
+        <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
+        <sys_security_acl display_value="x_15865_potluck_group_potluck_event">08585b2e4f021300bae4e321a310c7d0</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_a81dccb64f821300bae4e321a310c758</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-16 22:44:47</sys_updated_on>
+        <sys_user_role display_value="x_15865_potluck.potluck_guest_user" name="x_15865_potluck.potluck_guest_user">173be5a74f211300bae4e321a310c734</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

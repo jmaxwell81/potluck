@@ -6,25 +6,25 @@
         <description/>
         <device_type>browser</device_type>
         <hint/>
-        <name>Potluck Event</name>
+        <name>Potluck Guest</name>
         <order>100</order>
-        <roles/>
+        <roles>x_15865_potluck.potluck_guest_user</roles>
         <sys_class_name>sys_app_application</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-04-18 22:41:57</sys_created_on>
+        <sys_created_on>2018-04-24 16:46:28</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>50130c3d4f611300bae4e321a310c7f3</sys_id>
-        <sys_mod_count>5</sys_mod_count>
-        <sys_name>Group Potluck Event</sys_name>
+        <sys_id>233be5a74f211300bae4e321a310c75b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Potluck Guest</sys_name>
         <sys_overrides/>
         <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
-        <sys_update_name>sys_app_application_50130c3d4f611300bae4e321a310c7f3</sys_update_name>
+        <sys_update_name>sys_app_application_233be5a74f211300bae4e321a310c75b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-15 21:24:11</sys_updated_on>
-        <title>Group Potluck Event</title>
+        <sys_updated_on>2018-05-15 19:40:59</sys_updated_on>
+        <title>Potluck Guest</title>
         <view_name/>
     </sys_app_application>
 </record_update>
