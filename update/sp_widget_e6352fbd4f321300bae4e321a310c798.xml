@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(spModal,spUtil) {
+  /* widget controller */
+  var c = this;
+	//alert('Before Edit c.data.grp_event_id' + ": " + c.data.grp_event_id);
+	//alert('before edit c.data.meal_type' + ": " + c.data.meal_type);
+	c.onEditForm = function(widgetId, widgetInput, serverInput) {
+        spModal.open({
+            title: 'Edit your potluck item ',
+            widget: widgetId, 
+            widgetInput: widgetInput || {},
+					  shared: serverInput
+        }).then(function(){
+            console.log('widget dismissed');
+					  console.log("Client:serverInput.grp_event_id" + ": " + serverInput.grp_event_id);
+					  console.log("Client:serverInput.meal_type" + ": " + serverInput.meal_type);
+					  c.data.grp_event_id = serverInput.grp_event_id;
+					  c.data.meal_type = serverInput.meal_type;
+					  //alert('c.data.grp_event_id' + ": " + c.data.grp_event_id);
+					  //alert('c.data.meal_type' + ": " + c.data.meal_type);
+					  c.server.update();
+        });      
+    }
+		
+	c.onDeleteRecord = function(id) {
+	
+	   c.data.action = 'delete';
+		 var confirmed = false;
+		 spModal.confirm("Are you sure you want to delete this potluck item?").then(function(confirmed){
+            console.log("confirmed=" + confirmed);
+            if (confirmed){
+						    c.server.update().then(function() {
+			              c.data.action = undefined;
+		            })
+						}
+					  //c.server.refresh();
+        });
+		
+	
+	}
+	c.deleteRecord = function(mealItem,guestID,serverInput) {
+		c.data.grp_event_id = serverInput.grp_event_id;
+		c.data.meal_type = serverInput.meal_type;
+		c.server.get({
+			action: 'deleteGuest',
+			guestID: guestID
+		}).then(function(r) {
+			spUtil.addTrivialMessage("The " + mealItem +" potluck item has been deleted.");
+			   
+			   c.server.refresh();
+			
+		});
+	}
+	c.confirmDelete = function(mealItem,guestID,serverInput){
+     spModal.confirm("Are you sure you want to delete this item: " + mealItem +"?").then(function(confirmed){
+       if(confirmed){
+       c.deleteRecord(mealItem,guestID, serverInput);
+       }
+     });
+   }
+
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.pad {
+    
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.pad-left {
+   
+  margin-left: 20px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>potluck-guest</id>
+        <internal>false</internal>
+        <link/>
+        <name>Potluck Guest</name>
+        <option_schema>[{"hint":"The type of meal","name":"meal_type","section":"other","default_value":"maindish","label":"Meal Type","type":"string"}]</option_schema>
+        <public>false</public>
+        <roles>x_15865_potluck.group_potluck_event_user,x_15865_potluck.potluck_guest_user</roles>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	//var grp_event_id = '5c8a3fae4f421300bae4e321a310c716';
+  var potGuestGR = new GlideRecord('x_15865_potluck_potluck_guest');
+	//var table = $sp.getParameter('table') || 'x_15865_potluck_group_potluck_event';
+	//var potGuestGR = new GlideRecord(table);
+	if(input)
+		data.grp_event_id = input.grp_event_id;
+	//else if (options.grp_event_id)
+		//data.grp_event_id = options.grp_event_id;
+	else
+		data.grp_event_id = $sp.getParameter('sys_id').toString();
+	if (input && input.meal_type)
+		data.meal_type = input.meal_type;
+	else
+		data.meal_type = options.meal_type;
+	//console.log("data.grp_event_id1" + ": " + data.grp_event_id);
+	//console.log("data.meal_type" + ": " + data.meal_type);
+	potGuestGR.addQuery('event', data.grp_event_id);
+	//options.meal_type=options.meal_type||"maindish";
+	potGuestGR.addQuery('meal_type',data.meal_type);
+  potGuestGR.query();
+	var results = [];
+	while (potGuestGR.next()) {
+			//if (!$sp.canReadRecord(potGuestGR))
+			//	continue;
+		  if (input && input.guestID && input.action){
+				if (input.guestID == potGuestGR.sys_id && input.action == 'deleteGuest') { 
+				  potGuestGR.deleteRecord();
+					continue;
+			  }
+				
+			}
+			var item = {};
+			$sp.getRecordDisplayValues(item, potGuestGR, 'guest,meal_item');
+		  if (potGuestGR.guest == gs.getUserID())
+				item.is_owner = true;
+		  item.sys_id = potGuestGR.sys_id.toString();
+			results.push(item);
+	}
+	//if (potGuestGR.meal_type ){
+	//data.title = potGuestGR.meal_type.getDisplayValue();
+	//}else{
+	if (data.meal_type == 'appetizer'){
+		data.title = 'Appetizer';
+	}else if (data.meal_type == 'maindish'){
+		data.title = 'Main Dish';
+	}else if (data.meal_type == 'sidedish'){
+		data.title = 'Side Dish';
+	}else if (data.meal_type == 'bread'){
+		data.title = 'Bread';
+	}else if (data.meal_type == 'dessert'){
+		data.title = 'Dessert';
+	}else if (data.meal_type == 'beverage'){
+		data.title = 'Beverage';
+	}else if (data.meal_type == 'cups'){
+		data.title = 'Cups';
+	}else if (data.meal_type == 'servers'){
+		data.title = 'Servers';
+	}
+	//}
+	data.items = results;
+	//data.title = options.meal_type || potGuestGR.meal_type.getDisplayValue();
+	data.table = 'x_15865_potluck_potluck_guest';
+	console.log("data.title" + ": " + data.title);
+	console.log("data.grp_event_id" + ": " + data.grp_event_id);
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-06-20 18:28:33</sys_created_on>
+        <sys_id>e6352fbd4f321300bae4e321a310c798</sys_id>
+        <sys_mod_count>154</sys_mod_count>
+        <sys_name>Potluck Guest</sys_name>
+        <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
+        <sys_update_name>sp_widget_e6352fbd4f321300bae4e321a310c798</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-07-17 18:32:38</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+<!-- your widget template -->
+  <h2>{{ c.data.title }}</h2>
+  <div class="table-responsive">
+   <table class="table table-hover">
+     <colgroup>
+      <col class="col-md-3"></col>
+      <col class="col-md-3"></col>
+      <col class="col-md-3"></col>
+    </colgroup>
+     
+    <tbody>
+
+ 
+      <tr ng-repeat="item in c.data.items">
+        <td>{{item.guest}}</td><td>{{item.meal_item}}</td>
+        <td class="text-right">  <span ng-if="item.is_owner" class="btn-group pull-right" ><button ng-click="c.onEditForm('widget-form',{'table': c.data.table,'sys_id': item.sys_id},{'meal_type': c.data.meal_type,'grp_event_id': c.data.grp_event_id})" type="button" class="btn btn-sm btn-success">Edit</button><button ng-click="c.confirmDelete(item.meal_item, item.sys_id,{'meal_type': c.data.meal_type,'grp_event_id': c.data.grp_event_id})" type="button" class="btn btn-sm btn-danger">DELETE</button></span></td>
+      </tr>
+ 
+ 
+     
+ </tbody>
+ </table>
+  </div>
+  <div >
+    <button ng-click="c.onEditForm('potluck-widget-form',{'table': c.data.table,'sys_id': '-1','view': 'default'},{'meal_type': c.data.meal_type,'grp_event_id': c.data.grp_event_id})" type="button" class="btn btn-success btn-md pull-right pad">Add your item</button>
+  </div>
+  
+  
+    
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

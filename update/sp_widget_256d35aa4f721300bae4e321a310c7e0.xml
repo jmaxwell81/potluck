@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {  /* widget controller */  var c = this;}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>potluck-guest-multi</id>
+        <internal>false</internal>
+        <link/>
+        <name>Potluck guest multi</name>
+        <option_schema/>
+        <public>false</public>
+        <roles>x_15865_potluck.group_potluck_event_user,x_15865_potluck.potluck_guest_user</roles>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	(function() {
+    var options = [
+        {meal_type: "appetizer"},
+        {meal_type: "maindish"},
+        {meal_type: "sidedish"},
+        {meal_type: "dessert"},
+			  {meal_type: "beverage"},
+			{meal_type: "cups"},
+			{meal_type: "servers"}
+    ];
+
+    data.mealtypes = [];
+    for (var i in options) {
+        data.mealtypes.push($sp.getWidget("potluck-guest", options[i]));
+    }
+})();
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-06-22 18:50:21</sys_created_on>
+        <sys_id>256d35aa4f721300bae4e321a310c7e0</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Potluck guest multi</sys_name>
+        <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
+        <sys_update_name>sp_widget_256d35aa4f721300bae4e321a310c7e0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-07-17 18:30:20</sys_updated_on>
+        <template><![CDATA[<div class="container">
+<!-- your widget template -->
+
+ 
+  <h1 class="bg-success">Potluck Guests & Dishes</h1> 
+    
+      <div  ng-repeat="mealtype in c.data.mealtypes">
+        <div class="row">
+            <sp-widget widget="mealtype"></sp-widget>
+        </div>
+    </div>
+   </div>
+ ]]></template>
+    </sp_widget>
+</record_update>

@@ -12,7 +12,7 @@
                 <element label="Bread" sequence="3" value="bread"/>
                 <element label="Dessert" sequence="4" value="dessert"/>
                 <element label="Beverage" sequence="5" value="beverage"/>
-                <element label="Cups" sequence="6" value="Cups"/>
+                <element label="Cups" sequence="6" value="cups"/>
                 <element label="Servers" sequence="10" value="servers"/>
             </choice>
         </element>

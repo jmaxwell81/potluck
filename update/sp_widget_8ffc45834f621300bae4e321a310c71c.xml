@@ -28,9 +28,12 @@
         <script><![CDATA[(function() {
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
-	
-	var potEventGR = new GlideRecord('x_15865_potluck_group_potluck_event');
-  var got  = potEventGR.get('5c8a3fae4f421300bae4e321a310c716');
+	var table = $sp.getParameter('table') || 'x_15865_potluck_group_potluck_event';
+	var sys_id = $sp.getParameter('sys_id') || '5c8a3fae4f421300bae4e321a310c716';
+	var potEventGR = new GlideRecord(table);
+	//var potEventGR = new GlideRecord('x_15865_potluck_group_potluck_event');
+  //var got  = potEventGR.get('5c8a3fae4f421300bae4e321a310c716');
+	var got  = potEventGR.get(sys_id);
 	console.log('got' + ": " + got);
 	var gr = {};
 	$sp.getRecordDisplayValues(gr, potEventGR, 'event_group');
@@ -43,22 +46,30 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-06-11 18:20:06</sys_created_on>
         <sys_id>8ffc45834f621300bae4e321a310c71c</sys_id>
-        <sys_mod_count>93</sys_mod_count>
+        <sys_mod_count>108</sys_mod_count>
         <sys_name>Potluck title</sys_name>
         <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
         <sys_update_name>sp_widget_8ffc45834f621300bae4e321a310c71c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-06-13 22:00:58</sys_updated_on>
-        <template><![CDATA[<div class="panel panel-default">
+        <sys_updated_on>2018-06-25 20:24:46</sys_updated_on>
+        <template><![CDATA[
+ <div class="container">
+   <div class="row">
+     
+   
+             
+<div class="panel panel-default">
 <!-- your widget template -->
   
-  <div class="panel-body span6 offset4 ">
+  <div class="panel-body">
 	    <p class="itsite-title divofit-u-title light-bg oneline-name">
 	     <span class="itsite-name">{{ c.data.group_name }} Group</span> <span class= "divofit-lockup">Division of Information&nbsp;Technology</span>
 	    </p>
     </div>
-</div>]]></template>
+</div>
+   </div>
+]]></template>
     </sp_widget>
 </record_update>

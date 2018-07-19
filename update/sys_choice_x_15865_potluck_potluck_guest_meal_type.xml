@@ -129,10 +129,10 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>979d210e4f021300bae4e321a310c7c2</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>1</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-05-14 21:37:20</sys_updated_on>
-            <value>Cups</value>
+            <sys_updated_on>2018-06-26 15:28:46</sys_updated_on>
+            <value>cups</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
