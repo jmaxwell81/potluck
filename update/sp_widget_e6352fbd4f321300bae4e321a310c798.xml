@@ -44,13 +44,27 @@
 	c.deleteRecord = function(mealItem,guestID,serverInput) {
 		c.data.grp_event_id = serverInput.grp_event_id;
 		c.data.meal_type = serverInput.meal_type;
-		c.server.get({
+		/*c.server.get({
 			action: 'deleteGuest',
 			guestID: guestID
-		}).then(function(r) {
+		}).then(function() {
 			spUtil.addTrivialMessage("The " + mealItem +" potluck item has been deleted.");
-			   
-			   c.server.refresh();
+			   c.data.action = undefined;
+			   c.data.grp_event_id = serverInput.grp_event_id;
+		     c.data.meal_type = serverInput.meal_type;
+			   //c.server.refresh();
+			   c.server.update();
+			
+		});*/
+		c.data.action = 'deleteGuest';
+		c.data.guestID = guestID;
+		c.server.update().then(function() {
+			spUtil.addTrivialMessage("The " + mealItem +" potluck item has been deleted.");
+			   c.data.action = undefined;
+			   c.data.grp_event_id = serverInput.grp_event_id;
+		     c.data.meal_type = serverInput.meal_type;
+			   //c.server.refresh();
+			   c.server.update();
 			
 		});
 	}
@@ -104,8 +118,8 @@
 		data.meal_type = input.meal_type;
 	else
 		data.meal_type = options.meal_type;
-	//console.log("data.grp_event_id1" + ": " + data.grp_event_id);
-	//console.log("data.meal_type" + ": " + data.meal_type);
+	console.log("data.grp_event_id1" + ": " + data.grp_event_id);
+	console.log("data.meal_type1" + ": " + data.meal_type);
 	potGuestGR.addQuery('event', data.grp_event_id);
 	//options.meal_type=options.meal_type||"maindish";
 	potGuestGR.addQuery('meal_type',data.meal_type);
@@ -115,8 +129,12 @@
 			//if (!$sp.canReadRecord(potGuestGR))
 			//	continue;
 		  if (input && input.guestID && input.action){
+				console.log("Input:Guest Sys_id:" + input.guestID);
+				console.log("Input:action:" + input.action);
+				console.log("potGuestGR.sys_id:" + potGuestGR.sys_id);
 				if (input.guestID == potGuestGR.sys_id && input.action == 'deleteGuest') { 
 				  potGuestGR.deleteRecord();
+					console.log("Record deleted" );
 					continue;
 			  }
 				
@@ -160,14 +178,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-06-20 18:28:33</sys_created_on>
         <sys_id>e6352fbd4f321300bae4e321a310c798</sys_id>
-        <sys_mod_count>154</sys_mod_count>
+        <sys_mod_count>165</sys_mod_count>
         <sys_name>Potluck Guest</sys_name>
         <sys_package display_value="Potluck" source="x_15865_potluck">a80472114f611300bae4e321a310c73b</sys_package>
         <sys_policy/>
         <sys_scope display_value="Potluck">a80472114f611300bae4e321a310c73b</sys_scope>
         <sys_update_name>sp_widget_e6352fbd4f321300bae4e321a310c798</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-07-17 18:32:38</sys_updated_on>
+        <sys_updated_on>2018-08-16 22:04:59</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
 <!-- your widget template -->
   <h2>{{ c.data.title }}</h2>
